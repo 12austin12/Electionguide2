@@ -40,6 +40,9 @@ To ensure maximum maintainability and separation of concerns:
 ## ✨ Key Features
 
 - **"My Voting Plan" Dashboard:** A Firestore-backed progress tracker with a visual completion progress bar.
+- **Smart Assistant:**
+  - Provides rule-based guidance for common voting questions
+  - Helps first-time voters understand key steps
 - **Voting Simulator:** A 3D-styled interactive walkthrough of a polling booth.
 - **Eligibility Checker:** A quick logic-based tool to determine voting eligibility.
 - **Premium User Experience:** Built with a "Cyber-Civic" aesthetic featuring deep glassmorphism, fluid Framer Motion animations, and responsive layout.
@@ -47,7 +50,7 @@ To ensure maximum maintainability and separation of concerns:
 ## 💻 Technology Stack
 
 - **Frontend:** React.js, Vite, Framer Motion, Lucide React
-- **Google Services:** Firebase (Auth, Firestore), Google Generative AI (Gemini)
+- **Google Services:** Firebase (Auth, Firestore)
 - **Deployment:** Google Cloud Run & GitHub Pages
 
 ## 🚀 Getting Started Locally
@@ -66,7 +69,6 @@ To ensure maximum maintainability and separation of concerns:
 3. **Configure Environment Variables:**
    Create a `.env` file in the root directory and add your keys:
    ```env
-   VITE_GEMINI_API_KEY=your_gemini_key
    VITE_FIREBASE_API_KEY=your_firebase_key
    VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
    VITE_FIREBASE_PROJECT_ID=your_project_id
