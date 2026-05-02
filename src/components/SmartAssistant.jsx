@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 import { MessageSquare, X, Send, Bot, User, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GoogleGenAI } from '@google/genai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import DOMPurify from 'dompurify';
 import { marked } from 'marked';
 import './SmartAssistant.css';
@@ -46,29 +46,27 @@ const SmartAssistant = () => {
     setIsLoading(true);
 
     try {
-      const ai = new GoogleGenAI({ apiKey });
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const model = genAI.getGenerativeModel({ 
+        model: 'gemini-1.5-flash',
+        systemInstruction: SYSTEM_INSTRUCTION
+      });
       
-      // Formatting previous messages for history, excluding the system prompt
       const history = messages.slice(1).map(msg => ({
         role: msg.role === 'model' ? 'model' : 'user',
         parts: [{ text: msg.content }]
       }));
 
-      // In the new @google/genai SDK, we can pass systemInstruction directly
-      const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: [userMsg],
-        config: {
-          systemInstruction: SYSTEM_INSTRUCTION,
-        }
-      });
-
-      const reply = response.text || "I'm sorry, I couldn't generate a response.";
+      const chat = model.startChat({ history });
+      const result = await chat.sendMessage(userMsg);
+      const response = await result.response;
+      const reply = response.text() || "I'm sorry, I couldn't generate a response.";
+      
       setMessages(prev => [...prev, { role: 'model', content: reply }]);
       
     } catch (error) {
       console.error("Gemini API Error:", error);
-      setMessages(prev => [...prev, { role: 'model', content: "Sorry, I encountered an error. Please try again later." }]);
+      setMessages(prev => [...prev, { role: 'model', content: "Sorry, I encountered an error checking my brain. Please check your API key or network." }]);
     } finally {
       setIsLoading(false);
     }
