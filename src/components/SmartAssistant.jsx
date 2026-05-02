@@ -30,53 +30,58 @@ const SmartAssistant = () => {
     scrollToBottom();
   }, [messages, isOpen]);
 
+  const getAssistantResponse = (input) => {
+    input = input.toLowerCase();
+
+    if (input.includes("register")) {
+      return language === 'en' 
+        ? "You must register before the election deadline. Visit your state's election website."
+        : "Debe registrarse antes de la fecha límite de las elecciones. Visite el sitio web electoral de su estado.";
+    }
+
+    if (input.includes("id") || input.includes("proof") || input.includes("identificación")) {
+      return language === 'en'
+        ? "Bring a valid government ID such as Aadhaar, Voter ID, or Passport."
+        : "Lleve una identificación gubernamental válida, como Aadhaar, identificación de votante o pasaporte.";
+    }
+
+    if (input.includes("polling") || input.includes("booth") || input.includes("votar")) {
+      return language === 'en'
+        ? "You can find your polling booth using your voter ID or official election website."
+        : "Puede encontrar su lugar de votación utilizando su identificación de votante o el sitio web oficial de elecciones.";
+    }
+
+    if (input.includes("first time") || input.includes("primer")) {
+      return language === 'en'
+        ? "As a first-time voter, ensure you are registered, carry valid ID, and know your polling location."
+        : "Como votante por primera vez, asegúrese de estar registrado, llevar una identificación válida y conocer su lugar de votación.";
+    }
+
+    return language === 'en'
+      ? "Please check official election guidelines or use the dashboard tools for assistance."
+      : "Consulte las pautas electorales oficiales o utilice las herramientas del panel de control para obtener ayuda.";
+  };
+
   const handleSend = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
     
-    if (!apiKey) {
-      setMessages(prev => [...prev, { role: 'user', content: input }, { role: 'model', content: "Error: VITE_GEMINI_API_KEY is not configured in the environment variables." }]);
-      setInput('');
-      return;
-    }
-
     const userMsg = input.trim();
     setInput('');
     setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
     setIsLoading(true);
 
-    try {
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ 
-        model: 'gemini-1.5-flash',
-        systemInstruction: SYSTEM_INSTRUCTION
-      });
-      
-      const history = messages.slice(1).map(msg => ({
-        role: msg.role === 'model' ? 'model' : 'user',
-        parts: [{ text: msg.content }]
-      }));
-
-      const chat = model.startChat({ history });
-      const result = await chat.sendMessage(userMsg);
-      const response = await result.response;
-      const reply = response.text() || "I'm sorry, I couldn't generate a response.";
-      
-      setMessages(prev => [...prev, { role: 'model', content: reply }]);
-      
-    } catch (error) {
-      console.error("Gemini API Error:", error);
-      setMessages(prev => [...prev, { role: 'model', content: "Sorry, I encountered an error checking my brain. Please check your API key or network." }]);
-    } finally {
+    // Simulate network delay for realistic UX
+    setTimeout(() => {
+      const response = getAssistantResponse(userMsg);
+      setMessages(prev => [...prev, { role: 'model', content: response }]);
       setIsLoading(false);
-    }
+    }, 800);
   };
 
   const createMarkup = (text) => {
-    // Parse markdown and sanitize HTML to prevent XSS
-    const rawHtml = marked.parse(text);
-    const sanitizedHtml = DOMPurify.sanitize(rawHtml, { ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'a', 'p', 'br', 'ul', 'ol', 'li', 'code', 'pre'] });
-    return { __html: sanitizedHtml };
+    // Basic formatting for fallback text
+    return { __html: text };
   };
 
   return (
