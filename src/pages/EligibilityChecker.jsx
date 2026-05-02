@@ -59,7 +59,7 @@ const EligibilityChecker = () => {
         </p>
       )}
 
-      <div className="card checker-card">
+      <div className="glass-card checker-card">
         {step < questions.length && !isRejected ? (
           <div className="checker-step">
             <div className="progress-bar">

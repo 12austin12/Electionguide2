@@ -9,6 +9,7 @@ const EligibilityChecker = lazy(() => import('./pages/EligibilityChecker'));
 const Quiz = lazy(() => import('./pages/Quiz'));
 const Simulator = lazy(() => import('./pages/Simulator'));
 const Guide = lazy(() => import('./pages/Guide'));
+const MyVotingPlan = lazy(() => import('./pages/MyVotingPlan'));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -29,6 +30,7 @@ function App() {
             <Route path="eligibility" element={<EligibilityChecker />} />
             <Route path="quiz" element={<Quiz />} />
             <Route path="simulator" element={<Simulator />} />
+            <Route path="plan" element={<MyVotingPlan />} />
           </Route>
         </Routes>
       </Suspense>

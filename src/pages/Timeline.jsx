@@ -40,7 +40,7 @@ const Timeline = () => {
         {events.map((event, idx) => (
           <div className="timeline-item" key={idx}>
             <div className="timeline-dot"></div>
-            <div className="timeline-content card">
+            <div className="timeline-content glass-card">
               <div className="timeline-date">{event.date[language]}</div>
               <h3 className="timeline-title">{event.title[language]}</h3>
               <p className="timeline-desc">{event.desc[language]}</p>

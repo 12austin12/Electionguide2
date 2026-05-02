@@ -92,7 +92,7 @@ const Simulator = () => {
         </div>
       </div>
 
-      <div className="simulator-card card">
+      <div className="simulator-card glass-card">
         {step === 1 && (
           <div className="sim-step animate-in">
             <div className="sim-icon"><MapPin size={48} /></div>

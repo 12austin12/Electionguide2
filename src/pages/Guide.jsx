@@ -145,7 +145,7 @@ const Guide = () => {
           <h2>{t.sec2}</h2>
           <div className="steps-grid">
             {t.steps.map((step, idx) => (
-              <div key={idx} className="step-card card">
+              <div key={idx} className="step-card glass-card">
                 <div className="step-number">{idx + 1}</div>
                 <h3>{step.title}</h3>
                 <p>{step.desc}</p>
@@ -174,7 +174,7 @@ const Guide = () => {
           <h2>{t.sec4}</h2>
           <div className="types-grid">
             {t.types.map((type, idx) => (
-              <div key={idx} className="type-card card">
+              <div key={idx} className="type-card glass-card">
                 <BookOpen size={32} className="text-secondary mb-4" />
                 <h3>{type.type}</h3>
                 <p>{type.desc}</p>

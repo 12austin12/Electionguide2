@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { Home, Map, Calendar, CheckCircle, Settings, Moon, Sun, Globe, X, PlayCircle, Sparkles } from 'lucide-react';
+import { Home, Map, Calendar, CheckCircle, Settings, Moon, Sun, Globe, X, PlayCircle, Sparkles, ClipboardList } from 'lucide-react';
 import { AppContext } from '../context/AppContext';
 import SmartAssistant from './SmartAssistant';
 import './Layout.css';
@@ -13,6 +13,7 @@ const Layout = () => {
   const navItems = [
     { path: '/', icon: <Home size={20} />, label: { en: 'Home', es: 'Inicio' } },
     { path: '/guide', icon: <Map size={20} />, label: { en: 'Guide', es: 'Guía' } },
+    { path: '/plan', icon: <ClipboardList size={20} />, label: { en: 'My Plan', es: 'Mi Plan' } },
     { path: '/timeline', icon: <Calendar size={20} />, label: { en: 'Timeline', es: 'Calendario' } },
     { path: '/eligibility', icon: <CheckCircle size={20} />, label: { en: 'Eligibility', es: 'Elegibilidad' } },
     { path: '/simulator', icon: <PlayCircle size={20} />, label: { en: 'Simulator', es: 'Simulador' } },
