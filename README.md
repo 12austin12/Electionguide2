@@ -19,15 +19,23 @@ Welcome to **Election Guide AI**, a premium, professional-grade civic education 
 - Data persists across sessions, allowing users to track their readiness over time.
 
 ### Workflow
-1. **User logs in** via the "My Voting Plan" dashboard using their Google account.
-2. **Selects voting tasks** (e.g., Register to Vote, Find Polling Place).
-3. **Data saved to Firestore** in real-time with visual saving indicators.
-4. **Dashboard loads saved data** instantly upon page reload or returning to the site.
-5. **Progress tracking** is displayed via a dynamic "Completion Progress Bar" (our standout Judge-Visible feature).
+1. User logs in with Google.
+2. Selects voting checklist items.
+3. Data saved securely to Firestore.
+4. Dashboard loads saved data with dynamic progress tracking and smart reminders.
 
-### Gemini AI API
-- Powered by `@google/generative-ai` (`gemini-1.5-flash`).
-- Provides a floating "Smart Assistant" that answers complex, state-specific election queries instantly.
+### Code Structure
+To ensure maximum maintainability and separation of concerns:
+- `src/firebase.js` → Firebase config & initialization.
+- `src/auth.js` → Authentication logic (Google login/logout).
+- `src/db.js` → Firestore database operations (save/load).
+
+## 📸 Screenshots
+
+*(Replace these placeholders with actual screenshots of your application)*
+- ![Dashboard View](/path-to-dashboard-screenshot.png)
+- ![Smart Reminders](/path-to-reminders-screenshot.png)
+- ![Voting Simulator](/path-to-simulator-screenshot.png)
 
 ## ✨ Key Features
 
