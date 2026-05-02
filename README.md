@@ -30,6 +30,11 @@ To ensure maximum maintainability and separation of concerns:
 - `src/auth.js` → Authentication logic (Google login/logout).
 - `src/db.js` → Firestore database operations (save/load).
 
+## 🔒 Security
+- Firestore rules restrict users to their own data
+- Firebase Authentication ensures secure login
+- Environment variables used to protect API keys
+
 ## 📸 Screenshots
 
 *(Replace these placeholders with actual screenshots of your application)*
