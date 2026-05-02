@@ -1,6 +1,6 @@
 # Test Scenarios & Cases 🧪
 
-This document outlines the specific testing coverage for our core functionality, particularly focusing on our **Google Services Integration (Firebase & GenAI)**.
+This document outlines the specific testing coverage for our core functionality, particularly focusing on our **Google Services Integration (Firebase)**.
 
 ## Test Suite 1: Firebase Authentication & Firestore
 
@@ -20,12 +20,12 @@ This document outlines the specific testing coverage for our core functionality,
   - **Action**: A non-logged-in user attempts to save or view a plan.
   - **Result**: The UI completely hides the dashboard and forces a strict "Sign in to save your progress" wall. Firestore Security Rules block any raw API requests where `request.auth == null`.
 
-## Test Suite 2: Smart Assistant (Google Generative AI)
+## Test Suite 2: Smart Assistant (Rule-Based Fallback)
 
-- **Send valid query → AI responds correctly**
-  - **Action**: User types "How do I register in Texas?" and hits Send.
-  - **Result**: The Gemini API responds with accurate, sanitized data injected directly into the chat log.
+- **Send valid query → Assistant responds correctly**
+  - **Action**: User types "register" and hits Send.
+  - **Result**: The Smart Assistant shows a realistic typing indicator and responds with the appropriate state registration guidelines.
 
-- **Network failure during chat → Graceful error handling**
-  - **Action**: User sends a message while disconnected.
-  - **Result**: The API catches the error and a localized, user-friendly error message is displayed inside the chat interface without crashing the global application.
+- **Send unrecognized query → Graceful fallback**
+  - **Action**: User types an unknown question.
+  - **Result**: The Assistant politely directs them to official election guidelines or dashboard tools without crashing.
