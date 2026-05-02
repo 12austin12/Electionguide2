@@ -2,7 +2,13 @@ import { db } from './firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 /**
- * Saves the user's voting plan to Firestore.
+ * Saves the user's voting plan checklist to Firestore securely.
+ * This operation is protected by Firestore Security Rules.
+ * @async
+ * @param {Object} user - The authenticated Firebase user object.
+ * @param {Object} checklist - The boolean checklist state to save.
+ * @returns {Promise<string>} The ISO timestamp of the last update.
+ * @throws {Error} If the user is unauthenticated or the network fails.
  */
 export const savePlan = async (user, checklist) => {
   if (!user) throw new Error("User not authenticated");
@@ -22,7 +28,11 @@ export const savePlan = async (user, checklist) => {
 };
 
 /**
- * Loads the user's voting plan from Firestore.
+ * Retrieves the user's saved voting plan checklist from Firestore.
+ * @async
+ * @param {Object} user - The authenticated Firebase user object.
+ * @returns {Promise<Object|null>} The stored checklist data and lastUpdated timestamp, or null if none exists.
+ * @throws {Error} If the user is unauthenticated or the document read fails.
  */
 export const loadPlan = async (user) => {
   if (!user) throw new Error("User not authenticated");
